@@ -1,0 +1,14 @@
+# node_modules klasörünü hariç tut
+node_modules/
+backend/node_modules/
+login-app/node_modules/
+
+# Bağımlılık dosyalarını hariç tut
+*.log
+package-lock.json
+
+# Diğer gereksiz dosyalar
+.DS_Store
+.env
+build/
+dist/
