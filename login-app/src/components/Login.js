@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import axios from "axios";
-import { Link } from "react-router-dom"; // Link ile sayfa yönlendirme için
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -10,11 +9,18 @@ const Login = () => {
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post("http://localhost:5000/login", { email, password });
+      const response = await axios.post("http://localhost:5000/login", {
+        email,
+        password,
+      });
       setMessage(response.data.message);
     } catch (error) {
       setMessage("Invalid credentials");
     }
+  };
+
+  const handleHomeRedirect = () => {
+    window.location.href = "https://nephelis.software/";
   };
 
   return (
@@ -23,7 +29,6 @@ const Login = () => {
         <div className="card-body">
           <h2 className="card-title text-center">Login</h2>
           <form onSubmit={handleLogin}>
-            {/* Email Input */}
             <div className="form-control">
               <label className="label">
                 <span className="label-text">Email</span>
@@ -36,8 +41,6 @@ const Login = () => {
                 onChange={(e) => setEmail(e.target.value)}
               />
             </div>
-
-            {/* Password Input */}
             <div className="form-control mt-4">
               <label className="label">
                 <span className="label-text">Password</span>
@@ -50,23 +53,22 @@ const Login = () => {
                 onChange={(e) => setPassword(e.target.value)}
               />
             </div>
-
-            {/* Submit Button */}
             <div className="form-control mt-6">
               <button type="submit" className="btn btn-primary">Login</button>
             </div>
           </form>
-
-          {/* Error/Success Message */}
-          {message && <p className="mt-4 text-center text-red-500">{message}</p>}
-
-          {/* Register Link */}
-          <p className="text-center mt-4">
-            Not registered?{" "}
-            <Link to="/register" className="text-blue-500 hover:underline">
-              Register here
-            </Link>
-          </p>
+          {message && (
+            <p className="mt-4 text-center text-red-500">{message}</p>
+          )}
+          {/* Home Page Button */}
+          <div className="form-control mt-4">
+            <button
+              onClick={handleHomeRedirect}
+              className="btn btn-secondary"
+            >
+              Home Page
+            </button>
+          </div>
         </div>
       </div>
     </div>
